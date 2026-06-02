@@ -1,0 +1,44 @@
+{
+  "id": "weather",
+  "name": "Weather",
+  "description": "Real-time weather and 7-day forecasts for any city or coordinates worldwide. Powered by Open-Meteo — completely free, no API key required. Data sources: ECMWF, NOAA, DWD, Météo-France and other national weather services.",
+  "version": "1.0.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "units": {
+        "description": "Temperature unit preference: \"metric\" (Celsius) or \"imperial\" (Fahrenheit). Default: metric.",
+        "default": "metric",
+        "anyOf": [
+          { "type": "string", "const": "metric" },
+          { "type": "string", "const": "imperial" }
+        ]
+      },
+      "language": {
+        "type": "string",
+        "description": "Language code for location names (e.g. en, zh, de). Default: en.",
+        "default": "en"
+      },
+      "cache_ttl_seconds": {
+        "type": "number",
+        "description": "How long to cache weather results in seconds. Default: 300 (5 minutes).",
+        "default": 300,
+        "minimum": 30,
+        "maximum": 3600
+      }
+    }
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "weather_current",
+      "weather_current_coords",
+      "weather_forecast",
+      "weather_search_location",
+      "weather_clear_cache"
+    ]
+  }
+}
